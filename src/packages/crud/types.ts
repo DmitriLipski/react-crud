@@ -1,4 +1,5 @@
 import type { GET_LIST, GET_LIST_SUCCESS, GET_LIST_FAILURE } from "./constants";
+import type { Reducer } from "redux";
 
 export type Identifier = string | number;
 
@@ -31,7 +32,10 @@ export type ResourceDataType = Array<{
   id: Identifier;
   [key: string]: string | number | boolean;
 }>;
+
 export type ResourceErrorType = null | string;
+
+export type CustomReducersType = Record<string, Reducer>;
 
 export type ResourceActionTypes =
   | GetListAction
