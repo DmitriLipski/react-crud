@@ -4,7 +4,7 @@ import type { Reducer } from "redux";
 export type Identifier = string | number;
 
 export interface ResourceState {
-  data: ResourceDataType;
+  data: Array<ResourceDataType>;
   ids: Array<Identifier>;
   loading: boolean;
   error: null | string;
@@ -18,7 +18,7 @@ interface GetListAction {
 
 interface GetListSuccessAction {
   type: typeof GET_LIST_SUCCESS;
-  payload: { data: ResourceDataType };
+  payload: { data: Array<ResourceDataType> };
   meta: { resource: string };
 }
 
@@ -28,10 +28,10 @@ interface GetListFailureAction {
   meta: { resource: string };
 }
 
-export type ResourceDataType = Array<{
+export type ResourceDataType = {
   id: Identifier;
   [key: string]: string | number | boolean;
-}>;
+};
 
 export type ResourceErrorType = null | string;
 

@@ -1,14 +1,13 @@
-import { createStore, applyMiddleware, Store } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { getRootReducer } from "./reducers";
-import logger from "redux-logger";
-import type { CustomReducersType } from "./types";
+import { createStore, Store, StoreEnhancer } from "redux";
 
-const composedEnhancer = composeWithDevTools(applyMiddleware(logger));
+import { getRootReducer } from "./reducers";
+
+import type { CustomReducersType } from "./types";
 
 export const getStore = (
   resources: string[],
-  customReducers?: CustomReducersType
+  customReducers?: CustomReducersType,
+  composedEnhancer?: StoreEnhancer
 ): Store => {
   return createStore(
     getRootReducer(resources, customReducers),

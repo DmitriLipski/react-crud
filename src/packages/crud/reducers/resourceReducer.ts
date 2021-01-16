@@ -25,6 +25,7 @@ export const getResourceReducer = (resource: string) => {
         return {
           ...state,
           data: [...state.data, ...action.payload.data],
+          loading: false,
         };
       case GET_LIST_FAILURE:
         return {

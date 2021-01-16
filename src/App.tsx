@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import ReactCRUD from "./packages/crud";
 import { useDispatch } from "react-redux";
@@ -43,18 +43,30 @@ function App(): JSX.Element {
     <ReactCRUD resources={resources}>
       <div className="App">
         <h1>React CRUD</h1>
-        <Content />
+        <Main />
       </div>
     </ReactCRUD>
   );
 }
 
-const Content = () => {
+const Main = () => {
   const dispatch = useDispatch();
 
-  const handleClick = () => dispatch(getList("users"));
+  useEffect(() => {
+    dispatch({ type: "INIT_APP" });
+  }, []);
 
-  return <button onClick={handleClick}>Click</button>;
+  const handleLoadUsers = () => dispatch(getList("users"));
+  const handleLoadTasks = () => dispatch(getList("tasks"));
+
+  return (
+    <>
+      <button onClick={handleLoadUsers}>GET ALL USERS</button>
+      <br />
+      <br />
+      <button onClick={handleLoadTasks}>GET ALL TASKS</button>
+    </>
+  );
 };
 
 export default App;

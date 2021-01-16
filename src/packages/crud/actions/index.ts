@@ -13,7 +13,7 @@ export const getList = (resource: string): ResourceActionTypes => ({
 
 export const getListSuccess = (
   resource: string,
-  data: ResourceDataType
+  data: Array<ResourceDataType>
 ): ResourceActionTypes => ({
   type: GET_LIST_SUCCESS,
   payload: { data },
