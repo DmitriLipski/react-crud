@@ -1,4 +1,4 @@
-# Snowpack | React | Typescript boilerplate
+# React CRUD
 
 ## Available Scripts
 
