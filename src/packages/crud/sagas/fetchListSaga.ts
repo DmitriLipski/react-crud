@@ -8,7 +8,7 @@ export function* fetchListSaga(): Generator {
   yield takeLatest(GET_LIST, workerSaga);
 }
 
-function* workerSaga(action: ResourceActionTypes) {
+export function* workerSaga(action: ResourceActionTypes) {
   try {
     const data = yield call(
       { context: apiClient, fn: apiClient.getAll },

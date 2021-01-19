@@ -1,10 +1,15 @@
-import type { GET_LIST, GET_LIST_SUCCESS, GET_LIST_FAILURE } from "./constants";
+import type {
+  GET_LIST,
+  GET_LIST_SUCCESS,
+  GET_LIST_FAILURE,
+  GET_LIST_LOADING,
+} from "./constants";
 import type { Reducer } from "redux";
 
 export type Identifier = string | number;
 
 export interface ResourceState {
-  data: Array<ResourceDataType>;
+  data: Record<Identifier, ResourceDataType>;
   ids: Array<Identifier>;
   loading: boolean;
   error: null | string;
@@ -12,6 +17,11 @@ export interface ResourceState {
 
 interface GetListAction {
   type: typeof GET_LIST;
+  meta: { resource: string };
+}
+
+interface GetListLoadingAction {
+  type: typeof GET_LIST_LOADING;
   payload: { loading: boolean };
   meta: { resource: string };
 }
@@ -39,5 +49,6 @@ export type CustomReducersType = Record<string, Reducer>;
 
 export type ResourceActionTypes =
   | GetListAction
+  | GetListLoadingAction
   | GetListSuccessAction
   | GetListFailureAction;

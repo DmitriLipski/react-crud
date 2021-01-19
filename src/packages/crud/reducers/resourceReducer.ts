@@ -1,8 +1,13 @@
-import type { ResourceState, ResourceActionTypes } from "../types";
-import { GET_LIST, GET_LIST_FAILURE, GET_LIST_SUCCESS } from "../constants";
+import type { ResourceActionTypes, ResourceState } from "../types";
+import {
+  GET_LIST_FAILURE,
+  GET_LIST_LOADING,
+  GET_LIST_SUCCESS,
+} from "../constants";
+import { resourceDataNormalizer } from "./normalizer";
 
-const initialState: ResourceState = {
-  data: [],
+export const initialState: ResourceState = {
+  data: {},
   ids: [],
   loading: false,
   error: null,
@@ -15,7 +20,7 @@ export const getResourceReducer = (resource: string) => {
     }
 
     switch (action.type) {
-      case GET_LIST:
+      case GET_LIST_LOADING:
         return {
           ...state,
           loading: true,
@@ -24,7 +29,7 @@ export const getResourceReducer = (resource: string) => {
       case GET_LIST_SUCCESS:
         return {
           ...state,
-          data: [...state.data, ...action.payload.data],
+          data: resourceDataNormalizer(state.data, action.payload.data),
           loading: false,
         };
       case GET_LIST_FAILURE:
