@@ -12,11 +12,12 @@ describe("resource reducer", () => {
     );
   });
 
-  it("return correct", () => {
+  it("return correct state on loading", () => {
     const state: ResourceState = {
       data: {},
       ids: [],
       loading: true,
+      loaded: false,
       error: null,
     };
     expect(userReducer(initialState, getListLoading("users"))).to.deep.equal(
@@ -34,6 +35,7 @@ describe("resource reducer", () => {
       data: { 1: { id: 1, name: "Bob" }, 2: { id: 2, name: "John" } },
       ids: [1, 2],
       loading: false,
+      loaded: true,
       error: null,
     };
 
@@ -48,6 +50,7 @@ describe("resource reducer", () => {
       data: {},
       ids: [],
       loading: false,
+      loaded: false,
       error: "some error",
     };
 

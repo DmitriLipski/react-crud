@@ -12,6 +12,7 @@ export interface ResourceState {
   data: Record<Identifier, ResourceDataType>;
   ids: Array<Identifier>;
   loading: boolean;
+  loaded: boolean;
   error: null | string;
 }
 

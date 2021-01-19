@@ -10,6 +10,7 @@ export const initialState: ResourceState = {
   data: {},
   ids: [],
   loading: false,
+  loaded: false,
   error: null,
 };
 
@@ -29,8 +30,9 @@ export const getResourceReducer = (resource: string) => {
       case GET_LIST_SUCCESS:
         return {
           ...state,
-          data: resourceDataNormalizer(state.data, action.payload.data),
+          ...resourceDataNormalizer(state.data, action.payload.data),
           loading: false,
+          loaded: true,
         };
       case GET_LIST_FAILURE:
         return {
