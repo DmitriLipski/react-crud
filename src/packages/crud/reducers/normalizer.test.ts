@@ -28,7 +28,7 @@ describe("resourceDataNormalizer", () => {
         2: { id: 2, name: "John" },
         3: { id: 3, name: "Sam" },
       },
-      ids: [1, 2, 3],
+      ids: [2, 3],
     });
   });
 
@@ -41,6 +41,28 @@ describe("resourceDataNormalizer", () => {
 
     expect(resourceDataNormalizer(currentState, response)).to.deep.equal({
       data: { 1: { id: 1, name: "Bob" }, 2: { id: 2, name: "John" } },
+      ids: [1, 2],
+    });
+  });
+
+  it("returns correct result #4", () => {
+    const currentState = {
+      1: { id: 1, name: "Bob" },
+      2: { id: 2, name: "John" },
+      3: { id: 3, name: "Sam" },
+    };
+
+    const response = [
+      { id: 1, name: "Bob" },
+      { id: 2, name: "John" },
+    ];
+
+    expect(resourceDataNormalizer(currentState, response)).to.deep.equal({
+      data: {
+        1: { id: 1, name: "Bob" },
+        2: { id: 2, name: "John" },
+        3: { id: 3, name: "Sam" },
+      },
       ids: [1, 2],
     });
   });

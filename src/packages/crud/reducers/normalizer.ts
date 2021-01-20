@@ -10,5 +10,5 @@ export function resourceDataNormalizer(
   );
   const data = { ...currentStateData, ...responseById };
 
-  return { data, ids: Object.keys(data).map((id) => Number(id)) };
+  return { data, ids: Object.keys(responseById).map((id) => Number(id)) };
 }
