@@ -1,9 +1,8 @@
+import type { ResourceActionTypes, ResourceState } from "../types";
 import type {
   GetListFailureAction,
   GetListSuccessAction,
-  ResourceActionTypes,
-  ResourceState,
-} from "../types";
+} from "../types/getListTypes";
 import {
   GET_LIST_LOADING,
   GET_LIST_SUCCESS,
