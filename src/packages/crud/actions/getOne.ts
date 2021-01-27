@@ -11,8 +11,12 @@ import type {
   ResourceErrorType,
 } from "../types";
 
-export const getOne = (resource: string): ResourceActionTypes => ({
+export const getOne = (
+  resource: string,
+  id: Identifier
+): ResourceActionTypes => ({
   type: GET_ONE,
+  payload: { id },
   meta: { resource },
 });
 

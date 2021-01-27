@@ -1,14 +1,24 @@
 import type { ResourceActionTypes, ResourceState } from "../types";
+import {
+  GET_LIST_FAILURE,
+  GET_LIST_LOADING,
+  GET_LIST_SUCCESS,
+  GET_ONE_FAILURE,
+  GET_ONE_LOADING,
+  GET_ONE_SUCCESS,
+} from "../constants";
+import {
+  getListResourceDataNormalizer,
+  getOneResourceDataNormalizer,
+} from "./normalizer";
 import type {
   GetListFailureAction,
   GetListSuccessAction,
 } from "../types/getListTypes";
-import {
-  GET_LIST_LOADING,
-  GET_LIST_SUCCESS,
-  GET_LIST_FAILURE,
-} from "../constants";
-import { resourceDataNormalizer } from "./normalizer";
+import type {
+  GetOneSuccessAction,
+  GetOneFailureAction,
+} from "../types/getOneTypes";
 
 export const initialState: ResourceState = {
   data: {},
@@ -26,36 +36,64 @@ export const getResourceReducer = (resource: string) => {
 
     switch (action.type) {
       case GET_LIST_LOADING:
-        return handleLoad(state);
+        return handleLoading(state);
       case GET_LIST_SUCCESS:
-        return handleLoadSuccess(state, action);
+        return handleLoadListSuccess(state, action as GetListSuccessAction);
       case GET_LIST_FAILURE:
-        return handleLoadFailure(state, action);
+        return handleLoadListFailure(state, action);
+
+      case GET_ONE_LOADING:
+        return handleLoading(state);
+      case GET_ONE_SUCCESS:
+        return handleLoadOneSuccess(state, action);
+      case GET_ONE_FAILURE:
+        return handleLoadOneFailure(state, action);
       default:
         return state;
     }
   };
 };
 
-const handleLoad = (state: ResourceState): ResourceState => ({
+const handleLoading = (state: ResourceState): ResourceState => ({
   ...state,
   loading: true,
   error: null,
 });
 
-const handleLoadSuccess = (
+const handleLoadListSuccess = (
   state: ResourceState,
   action: GetListSuccessAction
 ): ResourceState => ({
   ...state,
-  ...resourceDataNormalizer(state.data, action.payload.data),
+  ...getListResourceDataNormalizer(state.data, action.payload.data),
   loading: false,
   loaded: true,
 });
 
-const handleLoadFailure = (
+const handleLoadListFailure = (
   state: ResourceState,
   action: GetListFailureAction
+) => ({
+  ...state,
+  loading: false,
+  error: action.payload.error,
+});
+
+//GET_ONE
+
+const handleLoadOneSuccess = (
+  state: ResourceState,
+  action: GetOneSuccessAction
+): ResourceState => ({
+  ...state,
+  ...getOneResourceDataNormalizer(state.data, state.ids, action.payload.data),
+  loading: false,
+  loaded: true,
+});
+
+const handleLoadOneFailure = (
+  state: ResourceState,
+  action: GetOneFailureAction
 ) => ({
   ...state,
   loading: false,

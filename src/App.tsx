@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 import ReactCRUD from "./packages/crud";
 import { useDispatch } from "react-redux";
-import { getList } from "./packages/crud/actions";
+import { getList, getOne } from "./packages/crud/actions";
 import { combineReducers } from "redux";
 
 const resources = ["users", "tasks"];
@@ -58,6 +58,8 @@ const Main = () => {
 
   const handleLoadUsers = () => dispatch(getList("users"));
   const handleLoadTasks = () => dispatch(getList("tasks"));
+  const handleLoadUserOne = () => dispatch(getOne("users", 1));
+  const handleLoadUserTwo = () => dispatch(getOne("users", 2));
 
   return (
     <>
@@ -65,6 +67,12 @@ const Main = () => {
       <br />
       <br />
       <button onClick={handleLoadTasks}>GET ALL TASKS</button>
+      <br />
+      <br />
+      <button onClick={handleLoadUserOne}>GET USER #1</button>
+      <br />
+      <br />
+      <button onClick={handleLoadUserTwo}>GET USER #2</button>
     </>
   );
 };

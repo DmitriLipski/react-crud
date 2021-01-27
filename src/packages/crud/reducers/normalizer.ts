@@ -1,9 +1,14 @@
 import type { Identifier, ResourceDataType } from "../types";
 
-export function resourceDataNormalizer(
+type ResourceNormalizerDataReturnType = {
+  data: Record<Identifier, ResourceDataType>;
+  ids: Array<Identifier>;
+};
+
+export function getListResourceDataNormalizer(
   currentStateData: Record<Identifier, ResourceDataType>,
   response: Array<ResourceDataType>
-): { data: Record<Identifier, ResourceDataType>; ids: Array<Identifier> } {
+): ResourceNormalizerDataReturnType {
   const responseById = response.reduce(
     (res, elem) => ({ ...res, [elem.id]: { ...elem } }),
     {}
@@ -11,4 +16,17 @@ export function resourceDataNormalizer(
   const data = { ...currentStateData, ...responseById };
 
   return { data, ids: Object.keys(responseById).map((id) => Number(id)) };
+}
+
+export function getOneResourceDataNormalizer(
+  currentResourceData: Record<Identifier, ResourceDataType>,
+  currentResourceIds: Array<Identifier>,
+  response: ResourceDataType
+): ResourceNormalizerDataReturnType {
+  const data = { ...currentResourceData, [response.id]: { ...response } };
+  const ids = currentResourceIds.includes(response.id)
+    ? [...currentResourceIds]
+    : [...currentResourceIds, response.id];
+
+  return { data, ids: ids.sort() };
 }

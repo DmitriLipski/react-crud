@@ -1,10 +1,10 @@
 import { expect } from "chai";
 import { takeLatest } from "redux-saga/effects";
-import { fetchListSaga, workerSaga } from "./fetchListSaga";
+import { getListSaga, workerSaga } from "./getListSaga";
 import { GET_LIST } from "../constants";
 
-describe("fetchListSaga", () => {
-  const genObject = fetchListSaga();
+describe("getListSaga", () => {
+  const genObject = getListSaga();
 
   it("should wait for every GET_LIST action and call workerSaga", () => {
     expect(genObject.next().value).to.deep.equal(

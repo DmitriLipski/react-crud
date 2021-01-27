@@ -40,3 +40,15 @@ export type ResourceActionTypes =
   | GetOneLoadingAction
   | GetOneSuccessAction
   | GetOneFailureAction;
+
+export type ResourceGetListActionTypes =
+  | GetListAction
+  | GetListLoadingAction
+  | GetListSuccessAction
+  | GetListFailureAction;
+
+export type ResourceGetOneActionTypes =
+  | GetOneAction
+  | GetOneLoadingAction
+  | GetOneSuccessAction
+  | GetOneFailureAction;

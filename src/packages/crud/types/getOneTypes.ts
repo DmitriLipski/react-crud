@@ -8,6 +8,7 @@ import type { Identifier, ResourceDataType, ResourceErrorType } from "./index";
 
 export interface GetOneAction {
   type: typeof GET_ONE;
+  payload: { id: Identifier };
   meta: { resource: string };
 }
 
