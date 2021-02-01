@@ -4,6 +4,7 @@ import ReactCRUD from "./packages/crud";
 import { useDispatch } from "react-redux";
 import { getList, getOne } from "./packages/crud/actions";
 import { combineReducers } from "redux";
+import { apiClient } from "./packages/crud/services/fetchData";
 
 const resources = ["users", "tasks"];
 
@@ -52,8 +53,21 @@ function App(): JSX.Element {
 const Main = () => {
   const dispatch = useDispatch();
 
+  type UserType = {
+    id: string | number;
+    name: string;
+    username: string;
+    email: string;
+  };
+
   useEffect(() => {
     dispatch({ type: "INIT_APP" });
+    apiClient
+      .fetchData<{ status: number; statusText: string; data: UserType[] }>(
+        "user"
+      )
+      .then((response) => console.log("response", response))
+      .catch((error) => console.log("error", error));
   }, []);
 
   const handleLoadUsers = () => dispatch(getList("users"));
