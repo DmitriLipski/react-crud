@@ -1,14 +1,14 @@
 import { expect } from "chai";
 import axios from "axios";
 import sinon, { SinonSpy } from "sinon";
-import { apiClient } from "./fetchData";
+import { apiClient } from "./ApiClient";
 
 const sandbox = sinon.createSandbox();
 
-describe("myAPI.hello method", function () {
+describe("ApiClient.getAll method", function () {
   beforeEach(function () {
     // stub out the `fetchData` method
-    sandbox.stub(axios, "get");
+    sandbox.stub(apiClient.instance, "get");
   });
 
   afterEach(function () {
@@ -17,8 +17,8 @@ describe("myAPI.hello method", function () {
   });
 
   it("should be called once", function () {
-    apiClient.fetchData("users");
-    sandbox.assert.calledOnce(axios.get as SinonSpy<any, any>);
+    apiClient.getAll("users");
+    sandbox.assert.calledOnce(apiClient.instance.get as SinonSpy<any, any>);
   });
 
   // it('should be called twice', function () {

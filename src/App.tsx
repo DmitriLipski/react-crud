@@ -4,7 +4,7 @@ import ReactCRUD from "./packages/crud";
 import { useDispatch } from "react-redux";
 import { getList, getOne } from "./packages/crud/actions";
 import { combineReducers } from "redux";
-import { apiClient } from "./packages/crud/services/fetchData";
+import { apiClient } from "./packages/crud/services/ApiClient";
 
 const resources = ["users", "tasks"];
 
@@ -63,11 +63,8 @@ const Main = () => {
   useEffect(() => {
     dispatch({ type: "INIT_APP" });
     apiClient
-      .fetchData<{ status: number; statusText: string; data: UserType[] }>(
-        "user"
-      )
-      .then((response) => console.log("response", response))
-      .catch((error) => console.log("error", error));
+      .getAll<{ status: number; statusText: string; data: UserType[] }>("users")
+      .then((response) => console.log("response", response));
   }, []);
 
   const handleLoadUsers = () => dispatch(getList("users"));

@@ -7,24 +7,27 @@ import createSagaMiddleware from "redux-saga";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { applyMiddleware } from "redux";
 import logger from "redux-logger";
+import { apiClient, HttpClientType } from "./services/ApiClient";
 
 interface ReactCRUDProps {
   children: JSX.Element | Array<JSX.Element> | string;
   resources: Array<string>;
   customReducers?: CustomReducersType;
+  customApiClient?: HttpClientType;
 }
 
 function ReactCRUD({
   children,
   resources,
   customReducers = {},
+  customApiClient,
 }: ReactCRUDProps): JSX.Element {
   const sagaMiddleware = createSagaMiddleware();
   const composedEnhancer = composeWithDevTools(
     applyMiddleware(sagaMiddleware, logger)
   );
   const store = getStore(resources, customReducers, composedEnhancer);
-  sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(rootSaga, customApiClient || apiClient);
 
   if (import.meta.env.MODE === "development" && import.meta.hot) {
     import.meta.hot.accept(
