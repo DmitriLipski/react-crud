@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "snowpack dev",
+    "start": "env-cmd -f .env.development snowpack dev",
     "build": "snowpack build",
     "test": "web-test-runner \"src/**/*.test.{ts,tsx}\" --node-resolve",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
@@ -31,6 +31,7 @@
     "@typescript-eslint/parser": "4.12.0",
     "@web/test-runner": "0.11.7",
     "chai": "4.2.0",
+    "env-cmd": "10.1.0",
     "eslint": "7.17.0",
     "eslint-config-prettier": "7.1.0",
     "eslint-watch": "7.0.0",
