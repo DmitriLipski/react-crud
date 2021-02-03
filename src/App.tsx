@@ -40,8 +40,15 @@ const resources = ["users", "tasks"];
 // };
 
 function App(): JSX.Element {
+  console.log("import.meta.env.", import.meta.env);
   return (
-    <ReactCRUD resources={resources}>
+    <ReactCRUD
+      resources={resources}
+      resourceMap={{
+        users: "/users",
+        tasks: "/tasks",
+      }}
+    >
       <div className="App">
         <h1>React CRUD</h1>
         <Main />

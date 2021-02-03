@@ -12,14 +12,14 @@ export interface HttpClientType {
 }
 
 export class ApiClient extends HttpClient implements HttpClientType {
-  private resources: Array<string>;
+  private resourceMap: Record<string, string>;
 
-  public constructor(baseURL: string, resources: Array<string>) {
+  public constructor(baseURL: string, resourceMap: Record<string, string>) {
     super(baseURL);
-    this.resources = resources;
+    this.resourceMap = resourceMap;
   }
   public getAll<T>(resource: string): Promise<AxiosResponse<T[]>> {
-    const url = `/${resource}`;
+    const url = this._getResourceBaseUrl(resource);
     return this.instance.get<T[]>(url);
   }
 
@@ -27,9 +27,20 @@ export class ApiClient extends HttpClient implements HttpClientType {
     resource: string,
     id: Identifier
   ): Promise<AxiosResponse<T>> {
-    const url = `/${resource}/${id}`;
+    const url = `${this._getResourceBaseUrl(resource)}/${id}`;
     return this.instance.get<T>(url);
   }
-}
 
-export const apiClient = new ApiClient(API, ["users", "tasks"]);
+  public _getResourceBaseUrl(resource: string): string {
+    if (!(resource in this.resourceMap)) {
+      throw new Error(`There is no "${resource}" resource`);
+    }
+    return this.resourceMap[resource];
+  }
+}
+const resourcesMap = {
+  users: "/users",
+  tasks: "/tasks",
+};
+
+export const apiClient = new ApiClient(API, resourcesMap);

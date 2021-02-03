@@ -2,7 +2,7 @@ import type { Identifier } from "../types";
 
 export class MockApiClient {
   data: Record<string, Array<any>> = {
-    "/users": [
+    users: [
       {
         id: 1,
         name: "Dima",
@@ -12,7 +12,7 @@ export class MockApiClient {
         name: "Roma",
       },
     ],
-    "/tasks": [
+    tasks: [
       {
         id: 1,
         title: "Learn NodeJs",

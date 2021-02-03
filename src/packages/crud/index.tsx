@@ -7,13 +7,15 @@ import createSagaMiddleware from "redux-saga";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { applyMiddleware } from "redux";
 import logger from "redux-logger";
-import { apiClient, HttpClientType } from "./services/ApiClient";
+import { ApiClient, HttpClientType } from "./services/ApiClient";
+import { MockApiClient } from "./services/MockApiClient";
 
 interface ReactCRUDProps {
   children: JSX.Element | Array<JSX.Element> | string;
   resources: Array<string>;
   customReducers?: CustomReducersType;
   customApiClient?: HttpClientType;
+  resourceMap: Record<string, string>;
 }
 
 function ReactCRUD({
@@ -21,13 +23,21 @@ function ReactCRUD({
   resources,
   customReducers = {},
   customApiClient,
+  resourceMap,
 }: ReactCRUDProps): JSX.Element {
   const sagaMiddleware = createSagaMiddleware();
   const composedEnhancer = composeWithDevTools(
     applyMiddleware(sagaMiddleware, logger)
   );
   const store = getStore(resources, customReducers, composedEnhancer);
-  sagaMiddleware.run(rootSaga, customApiClient || apiClient);
+
+  const apiClient =
+    import.meta.env.SNOWPACK_PUBLIC_DATA_PROVIDER === "local"
+      ? new MockApiClient()
+      : customApiClient ||
+        new ApiClient(import.meta.env.SNOWPACK_PUBLIC_API_URL, resourceMap);
+
+  sagaMiddleware.run(rootSaga, apiClient as HttpClientType);
 
   if (import.meta.env.MODE === "development" && import.meta.hot) {
     import.meta.hot.accept(
