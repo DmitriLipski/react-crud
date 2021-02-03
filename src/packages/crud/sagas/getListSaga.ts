@@ -2,7 +2,7 @@ import { takeLatest, call, put } from "redux-saga/effects";
 import { GET_LIST } from "../constants";
 import type { ResourceGetListActionTypes } from "../types";
 import { getListFailure, getListLoading, getListSuccess } from "../actions";
-import type { HttpClientType } from "../services/ApiClient";
+import type { HttpClientType } from "../services";
 
 export function* getListSaga(apiClient: HttpClientType): Generator {
   yield takeLatest(GET_LIST, workerSaga, apiClient);

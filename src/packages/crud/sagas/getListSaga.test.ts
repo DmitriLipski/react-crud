@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { takeLatest } from "redux-saga/effects";
 import { getListSaga, workerSaga } from "./getListSaga";
 import { GET_LIST } from "../constants";
-import { apiClient } from "../services/ApiClient";
+import { apiClient } from "../services";
 
 describe("getListSaga", () => {
   const genObject = getListSaga(apiClient);

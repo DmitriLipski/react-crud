@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import axios from "axios";
 import sinon, { SinonSpy } from "sinon";
-import { apiClient } from "./ApiClient";
+import { apiClient } from "./index";
 
 const sandbox = sinon.createSandbox();
 

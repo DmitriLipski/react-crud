@@ -4,7 +4,7 @@ import ReactCRUD from "./packages/crud";
 import { useDispatch } from "react-redux";
 import { getList, getOne } from "./packages/crud/actions";
 import { combineReducers } from "redux";
-import { apiClient } from "./packages/crud/services/ApiClient";
+import { apiClient } from "./packages/crud/services";
 
 const resources = ["users", "tasks"];
 
@@ -40,7 +40,6 @@ const resources = ["users", "tasks"];
 // };
 
 function App(): JSX.Element {
-  console.log("import.meta.env.", import.meta.env);
   return (
     <ReactCRUD
       resources={resources}

@@ -1,7 +1,5 @@
 import type { AxiosResponse } from "axios";
 
-export const API = "https://jsonplaceholder.typicode.com";
-
 import { HttpClient } from "./HttpClient";
 import type { Identifier } from "../types";
 
@@ -38,9 +36,3 @@ export class ApiClient extends HttpClient implements HttpClientType {
     return this.resourceMap[resource];
   }
 }
-const resourcesMap = {
-  users: "/users",
-  tasks: "/tasks",
-};
-
-export const apiClient = new ApiClient(API, resourcesMap);
