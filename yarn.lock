@@ -487,6 +487,18 @@
     lz-string "^1.4.4"
     pretty-format "^26.6.2"
 
+"@testing-library/react-hooks@5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@testing-library/react-hooks/-/react-hooks-5.0.3.tgz#dd0d2048817b013b266d35ca45e3ea48a19fd87e"
+  integrity sha512-UrnnRc5II7LMH14xsYNm/WRch/67cBafmrSQcyFh0v+UUmSf1uzfB7zn5jQXSettGwOSxJwdQUN7PgkT0w22Lg==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "@types/react" ">=16.9.0"
+    "@types/react-dom" ">=16.9.0"
+    "@types/react-test-renderer" ">=16.9.0"
+    filter-console "^0.1.1"
+    react-error-boundary "^3.1.0"
+
 "@testing-library/react@11.2.2":
   version "11.2.2"
   resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-11.2.2.tgz#099c6c195140ff069211143cb31c0f8337bdb7b7"
@@ -727,7 +739,7 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.3.tgz#7ee330ba7caafb98090bece86a5ee44115904c2c"
   integrity sha512-ewFXqrQHlFsgc09MK5jP5iR7vumV/BYayNC6PgJO2LPe8vrnNFyjQjSppfEngITi0qvfKtzFvgKymGheFM9UOA==
 
-"@types/react-dom@17.0.0":
+"@types/react-dom@17.0.0", "@types/react-dom@>=16.9.0":
   version "17.0.0"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.0.tgz#b3b691eb956c4b3401777ee67b900cb28415d95a"
   integrity sha512-lUqY7OlkF/RbNtD5nIq7ot8NquXrdFrjSOR6+w9a9RFQevGi1oZO1dcJbXMeONAPKtZ2UrZOEJ5UOCVsxbLk/g==
@@ -744,10 +756,25 @@
     hoist-non-react-statics "^3.3.0"
     redux "^4.0.0"
 
+"@types/react-test-renderer@>=16.9.0":
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-17.0.0.tgz#9be47b375eeb906fced37049e67284a438d56620"
+  integrity sha512-nvw+F81OmyzpyIE1S0xWpLonLUZCMewslPuA8BtjSKc5XEbn8zEQBXS7KuOLHTNnSOEM2Pum50gHOoZ62tqTRg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@17.0.0":
   version "17.0.0"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.0.tgz#5af3eb7fad2807092f0046a1302b7823e27919b8"
   integrity sha512-aj/L7RIMsRlWML3YB6KZiXB3fV2t41+5RBGYF8z+tAKU43Px8C3cYUZsDvf1/+Bm4FK21QWBrDutu8ZJ/70qOw==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^3.0.2"
+
+"@types/react@>=16.9.0":
+  version "17.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.1.tgz#eb1f1407dea8da3bc741879c1192aa703ab9975b"
+  integrity sha512-w8t9f53B2ei4jeOqf/gxtc2Sswnc3LBK5s0DyJcg5xd10tMHXts2N31cKjWfH9IC/JvEPa/YF1U4YeP1t4R6HQ==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -2220,6 +2247,11 @@ fill-range@^7.0.1:
   integrity sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==
   dependencies:
     to-regex-range "^5.0.1"
+
+filter-console@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/filter-console/-/filter-console-0.1.1.tgz#6242be28982bba7415bcc6db74a79f4a294fa67c"
+  integrity sha512-zrXoV1Uaz52DqPs+qEwNJWJFAWZpYJ47UNmpN9q4j+/EYsz85uV0DC9k8tRND5kYmoVzL0W+Y75q4Rg8sRJCdg==
 
 find-cache-dir@^3.3.1:
   version "3.3.1"
@@ -3738,6 +3770,13 @@ react-dom@17.0.1:
     object-assign "^4.1.1"
     scheduler "^0.20.1"
 
+react-error-boundary@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-3.1.0.tgz#9487443df2f9ba1db90d8ab52351814907ea4af3"
+  integrity sha512-lmPrdi5SLRJR+AeJkqdkGlW/CRkAUvZnETahK58J4xb5wpbfDngasEGu+w0T1iXEhVrYBJZeW+c4V1hILCnMWQ==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+
 react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -3907,7 +3946,7 @@ rollup-plugin-inject@^3.0.0:
     magic-string "^0.25.3"
     rollup-pluginutils "^2.8.1"
 
-rollup-plugin-node-polyfills@^0.2.1:
+rollup-plugin-node-polyfills@0.2.1, rollup-plugin-node-polyfills@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/rollup-plugin-node-polyfills/-/rollup-plugin-node-polyfills-0.2.1.tgz#53092a2744837164d5b8a28812ba5f3ff61109fd"
   integrity sha512-4kCrKPTJ6sK4/gLL/U5QzVT8cxJcofO0OU74tnB19F40cmuAKSzH5/siithxlofFEjwvw1YAhPmbvGNA6jEroA==

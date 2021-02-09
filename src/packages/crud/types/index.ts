@@ -14,12 +14,16 @@ import type {
 
 export type Identifier = string | number;
 
-export interface ResourceState {
-  data: Record<Identifier, ResourceDataType>;
+export interface ResourceState<T = any> {
+  data: Record<Identifier, T>;
   ids: Array<Identifier>;
   loading: boolean;
   loaded: boolean;
   error: null | string;
+}
+
+export interface State {
+  resources: Record<string, ResourceState>;
 }
 
 export type ResourceDataType = {
