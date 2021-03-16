@@ -4,10 +4,16 @@ import type {
   GET_LIST_LOADING,
   GET_LIST_SUCCESS,
 } from "../constants";
-import type { ResourceDataType, ResourceErrorType } from "./index";
+import type {
+  Filter,
+  Pagination,
+  ResourceDataType,
+  ResourceErrorType,
+} from "./index";
 
 export interface GetListAction {
   type: typeof GET_LIST;
+  payload: { pagination?: Pagination; filter?: Filter };
   meta: { resource: string };
 }
 

@@ -21,9 +21,34 @@ describe("ApiClient.getAll method", function () {
     sandbox.assert.calledOnce(apiClient.instance.get as SinonSpy<any, any>);
   });
 
-  // it('should be called twice', function () {
-  //   apiClient.fetchData('users');
-  //   apiClient.fetchData('users');
-  //   sandbox.assert.calledTwice(apiClient.fetchData as SinonSpy<any, any>);
-  // });
+  it("should return correct params object", function () {
+    expect(apiClient._getParams({ filter: {} })).to.deep.equal({ params: {} });
+  });
+
+  it("should return correct params object", function () {
+    expect(
+      apiClient._getParams({ pagination: { page: 1, size: 10 }, filter: {} })
+    ).to.deep.equal({ params: { page: 1, size: 10 } });
+  });
+
+  it("should return correct params object", function () {
+    expect(
+      apiClient._getParams({
+        pagination: { page: 1, size: 10 },
+        filter: { userId: 1 },
+      })
+    ).to.deep.equal({ params: { page: 1, size: 10, userId: 1 } });
+  });
+
+  it("should return correct params object", function () {
+    expect(
+      apiClient._getParams({
+        pagination: { page: 1, size: 10 },
+        filter: { userId: 1 },
+        sort: { field: "id", order: "ASC" },
+      })
+    ).to.deep.equal({
+      params: { page: 1, size: 10, userId: 1, field: "id", order: "ASC" },
+    });
+  });
 });

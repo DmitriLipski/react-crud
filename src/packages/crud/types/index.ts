@@ -56,3 +56,11 @@ export type ResourceGetOneActionTypes =
   | GetOneLoadingAction
   | GetOneSuccessAction
   | GetOneFailureAction;
+
+export type Pagination = { page: number; size: number };
+
+export type Filter = { [key: string]: string | number };
+
+export type Sort = { field: string; order: "ASC" | "DESC" };
+
+export type Options = { pagination?: Pagination; filter?: Filter; sort?: Sort };

@@ -5,13 +5,18 @@ import {
   GET_LIST_FAILURE,
 } from "../constants";
 import type {
+  Options,
   ResourceActionTypes,
   ResourceDataType,
   ResourceErrorType,
 } from "../types";
 
-export const getList = (resource: string): ResourceActionTypes => ({
+export const getList = (
+  resource: string,
+  options?: Options
+): ResourceActionTypes => ({
   type: GET_LIST,
+  payload: { ...options },
   meta: { resource },
 });
 

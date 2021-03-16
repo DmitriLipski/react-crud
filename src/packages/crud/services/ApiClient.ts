@@ -1,10 +1,10 @@
 import type { AxiosResponse } from "axios";
 
 import { HttpClient } from "./HttpClient";
-import type { Identifier } from "../types";
+import type { Filter, Identifier, Options, Pagination, Sort } from "../types";
 
 export interface HttpClientType {
-  getAll<T>(resource: string): Promise<AxiosResponse<T[]>>;
+  getAll<T>(resource: string, options: Options): Promise<AxiosResponse<T[]>>;
   getOne<T>(resource: string, id: Identifier): Promise<AxiosResponse<T>>;
   // resourcesMap: Record<string, string>
 }
@@ -16,9 +16,18 @@ export class ApiClient extends HttpClient implements HttpClientType {
     super(baseURL);
     this.resourceMap = resourceMap;
   }
-  public getAll<T>(resource: string): Promise<AxiosResponse<T[]>> {
+  public getAll<T>(
+    resource: string,
+    options?: Options
+  ): Promise<AxiosResponse<T[]>> {
     const url = this._getResourceBaseUrl(resource);
-    return this.instance.get<T[]>(url);
+    return this.instance.get<T[]>(url, {
+      ...this._getParams({
+        pagination: options?.pagination,
+        filter: options?.filter,
+        sort: options?.sort,
+      }),
+    });
   }
 
   public getOne<T>(
@@ -34,5 +43,17 @@ export class ApiClient extends HttpClient implements HttpClientType {
       throw new Error(`There is no "${resource}" resource`);
     }
     return this.resourceMap[resource];
+  }
+
+  public _getParams({
+    pagination,
+    filter,
+    sort,
+  }: {
+    pagination?: Pagination;
+    filter?: Filter;
+    sort?: Sort;
+  }): { params: { [key: string]: string | number } } {
+    return { params: { ...pagination, ...filter, ...sort } };
   }
 }

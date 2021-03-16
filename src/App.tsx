@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { getList, getOne } from "./packages/crud/actions";
 import { combineReducers } from "redux";
 import { useListController } from "./packages/crud/controllers/useListController";
-import type { Identifier } from "./packages/crud/types";
+import type { Identifier, Options } from "./packages/crud/types";
 
 const resources = ["users", "tasks"];
 
@@ -67,8 +67,13 @@ type UserType = {
 const Main = () => {
   const dispatch = useDispatch();
 
-  const controller = useListController<UserType>("users");
-  console.log("controller", controller);
+  const options: Options = {
+    filter: { userId: 1 },
+    pagination: { page: 1, size: 10 },
+    sort: { field: "id", order: "ASC" },
+  };
+
+  const controller = useListController<UserType>("users", options);
 
   const handleLoadUsers = () => dispatch(getList("users"));
   const handleLoadTasks = () => dispatch(getList("tasks"));
@@ -119,14 +124,16 @@ function UserList({ data, ids, loading, loaded, error }: UserListProps) {
 
   return (
     <table className="user-list">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-      </tr>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
       <tbody>
         {ids.map((id) => (
-          <User user={data[id]} />
+          <User key={id} user={data[id]} />
         ))}
       </tbody>
     </table>

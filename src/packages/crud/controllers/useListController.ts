@@ -4,6 +4,7 @@ import { getList } from "../actions";
 import { getResource } from "../selectors";
 import type {
   Identifier,
+  Options,
   ResourceErrorType,
   ResourceState,
   State,
@@ -18,16 +19,18 @@ type UseListControllerReturnType<T> = {
 };
 
 export function useListController<T>(
-  resource: string
+  resource: string,
+  options?: Options
 ): UseListControllerReturnType<T> {
   const dispatch = useDispatch();
+
   const { loading, loaded, error, data, ids } = useSelector<
     State,
     ResourceState<T>
   >((state) => getResource(state, resource));
 
   useEffect(() => {
-    dispatch(getList("users"));
+    dispatch(getList(resource, options));
   }, []);
 
   return { data, ids, loading, loaded, error };
